@@ -8,6 +8,10 @@ export default defineConfig(() => ({
   base: './',
   server: {
     port: 3000,
+    host: true,
+    // Vite blocks unknown Host headers (403 / "Blocked request"). HAProxy
+    // forwards Host: demo.dragnet.ca, which is not allowed by default.
+    allowedHosts: ['demo.dragnet.ca', '.dragnet.ca'],
     proxy: {
       '/api/socket': 'ws://localhost:8082',
       '/api': 'http://localhost:8082',
